@@ -1,0 +1,7 @@
+{
+  "name": "grocery-calculator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
