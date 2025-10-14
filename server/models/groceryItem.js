@@ -9,22 +9,22 @@ const groceryItemSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: true,
-    min: 0
-  },
-  category: {
-    type: String,
-    required: true,
-    enum: ['produce', 'dairy', 'meat', 'pantry', 'beverages', 'other']
+    min: 0.01
   },
   quantity: {
     type: Number,
     required: true,
-    min: 1
+    min: 0.01
   },
   unit: {
     type: String,
     required: true,
-    enum: ['piece', 'kg', 'g', 'lb', 'oz', 'l', 'ml']
+    enum: ['bag', 'bottle', 'box', 'gallon', 'item', 'lb', 'oz']
+  },
+  isFood: {
+    type: Boolean,
+    required: true,
+    default: true
   },
   createdAt: {
     type: Date,
