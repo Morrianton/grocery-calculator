@@ -14,11 +14,13 @@ router.get('/', async (req, res) => {
 
 // Create a new grocery item
 router.post('/', async (req, res) => {
+  console.log('Received item data:', req.body);
   const item = new GroceryItem(req.body);
   try {
     const newItem = await item.save();
     res.status(201).json(newItem);
   } catch (error) {
+    console.error('Validation error:', error);
     res.status(400).json({ message: error.message });
   }
 });
@@ -63,6 +65,16 @@ router.delete('/:id', async (req, res) => {
     } else {
       res.status(404).json({ message: 'Item not found' });
     }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Clear all items from cart
+router.delete('/', async (req, res) => {
+  try {
+    await GroceryItem.deleteMany({});
+    res.json({ message: 'Cart cleared' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
