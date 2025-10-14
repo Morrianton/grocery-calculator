@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ mode === 'add' ? 'Add Item' : 'Edit Item' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Item Name</ion-label>
+        <ion-input type="text" formControlName="name" placeholder="Enter item name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Quantity</ion-label>
+        <ion-input type="number" formControlName="quantity" placeholder="Enter quantity" min="0.01" step="0.01"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Unit</ion-label>
+        <ion-select formControlName="unit">
+          <ion-select-option value="item">Item</ion-select-option>
+          <ion-select-option value="lb">Pound (lb)</ion-select-option>
+          <ion-select-option value="oz">Ounce (oz)</ion-select-option>
+          <ion-select-option value="gallon">Gallon</ion-select-option>
+          <ion-select-option value="box">Box</ion-select-option>
+          <ion-select-option value="bag">Bag</ion-select-option> 
+          <ion-select-option value="bottle">Bottle</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Price per {{ itemForm.get('unit')?.value || 'unit' }}</ion-label>
+        <div class="input-wrapper">
+          <span *ngIf="itemForm.get('price')?.value">$</span>
+          <ion-input type="number" formControlName="price" placeholder="Enter price" min="0.01" step="0.01"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Is this a food item?</ion-label>
+        <ion-toggle formControlName="isFood"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" [disabled]="!itemForm.valid">
+        {{ mode === 'add' ? 'Add to Cart' : 'Update Item' }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
