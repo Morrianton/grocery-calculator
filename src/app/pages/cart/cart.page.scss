@@ -1,0 +1,17 @@
+.food-item {
+  color: var(--ion-color-success);
+}
+
+.non-food-item {
+  color: var(--ion-color-warning);
+}
+
+ion-footer ion-toolbar {
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+ion-footer ion-list {
+  margin: 0;
+  padding: 0;
+}
