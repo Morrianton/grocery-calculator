@@ -13,12 +13,12 @@ console.log(`Running in ${isProd ? 'Production' : 'Development'} mode`)
 
 // Dynamically choose the correct connection string
 const mongoURI = isProd
-? process.env.MONGODB_URI_PROD
-: process.env.MONGODB_URI_LOCAL;
+  ? process.env.MONGODB_URI_PROD
+  : process.env.MONGODB_URI_LOCAL;
 
 // Connect to MongoDB
 mongoose.connect(mongoURI)
-.then(() => console.log(`✅ Connected to MongoDB (${isProd ? 'Production' : 'Developmnet'})`))
+.then(() => console.log(`✅ Connected to MongoDB (${isProd ? 'Production' : 'Development'})`))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Middleware
