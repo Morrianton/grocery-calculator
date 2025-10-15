@@ -8,12 +8,18 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const isProd = process.env.NODE_ENV === 'production';
+console.log(`Running in ${isProd ? 'Production' : 'Development'} mode`)
+
+// Dynamically choose the correct connection string
+const mongoURI = isProd
+? process.env.MONGODB_URI_PROD
+: process.env.MONGODB_URI_LOCAL;
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(mongoURI)
+.then(() => console.log(`✅ Connected to MongoDB (${isProd ? 'Production' : 'Developmnet'})`))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Middleware
 app.use(helmet());
@@ -40,6 +46,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(staticDir, "index.html"));
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
