@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-  IonItemSliding, IonItem, IonLabel, IonNote, IonItemOptions,
-  IonItemOption, IonIcon, IonFab, IonFabButton, IonFooter,
-  IonButtons, IonButton
+  IonItemSliding, IonItem, IonLabel, IonSpinner, IonNote,
+  IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton,
+  IonFooter, IonButtons, IonButton
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { trashOutline, createOutline, add } from 'ionicons/icons';
@@ -29,6 +29,7 @@ import { trashOutline, createOutline, add } from 'ionicons/icons';
     IonItemSliding,
     IonItem,
     IonLabel,
+    IonSpinner,
     IonNote,
     IonItemOptions,
     IonItemOption,
@@ -46,6 +47,7 @@ export class CartPage implements OnInit {
   foodTax = 0;
   nonFoodTax = 0;
   total = 0;
+  isLoading = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -64,11 +66,14 @@ export class CartPage implements OnInit {
   }
 
   async loadItems() {
+    this.isLoading = true;
     try {
       this.items = await this.groceryService.getItems();
       this.calculateTotals();
     } catch (error) {
       console.error('Error loading items:', error);
+    } finally {
+      this.isLoading = false;
     }
   }
 
