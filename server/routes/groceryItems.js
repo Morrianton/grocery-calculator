@@ -6,7 +6,8 @@ const GroceryItem = require('../models/groceryItem');
 router.get('/', async (req, res) => {
   try {
     const items = await GroceryItem.find();
-    res.json(items);
+    const timeSortedItems = items.sort((a, b) => b.createdAt - a.createdAt);
+    res.json(timeSortedItems);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
