@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.2] - 2026-08-08
+
 ### Added
 - `README.md` with project overview, architecture, setup, and current project health.
 - `docs/architecture.md` with a diagram-style architecture overview.
