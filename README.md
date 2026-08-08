@@ -143,6 +143,11 @@ The server chooses `MONGODB_URI_PROD` when `NODE_ENV=production`, otherwise it u
 - `npm run deploy-prod` — build and deploy to GitHub Pages using `angular-cli-ghpages`.
 
 ## Notes & Suggestions
+- CI is configured to run lint, tests, and a development build on every push or pull request to `main`.
+- A Render deployment is triggered automatically after successful builds on `main` via the GitHub Actions workflow.
+- Store your Render API key in GitHub repository secrets as `RENDER_API_KEY`.
+- The Render service ID used by the workflow is `srv-d3neg26r433s73bgp1l0`.
+- The Render API key name inside Render is only a friendly label and does not need to match the GitHub secret name.
 
 - The frontend currently uses the built production API URL in `environment.prod.ts`.
 - The `clearCart()` method in `GroceryService` maps to the backend route `DELETE /api/grocery-items`.
