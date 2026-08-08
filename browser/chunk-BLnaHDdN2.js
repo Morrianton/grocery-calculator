@@ -1,0 +1,1 @@
+import{a as v}from"./chunk-W-3lWRFQ.js";var s=()=>{let e;return{lock:()=>v(null,null,function*(){let o=e,t;return e=new Promise(n=>t=n),o!==void 0&&(yield o),t})}};export{s as t};
