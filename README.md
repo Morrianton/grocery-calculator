@@ -87,6 +87,7 @@ For a detailed architecture overview, see `docs/architecture.md`.
 - **Direct vulnerable packages**: `@angular-devkit/build-angular`, `@angular/cli`, `@capacitor/cli` (these are currently at the latest compatible stable versions for the Angular 22/Capacitor 8 stack; fixes would require semver-major upgrades)
 - **Notes**: `npm audit fix` was run. Remaining advisories are in build/tooling dependencies and now require moving to a newer Angular major release or a newer Capacitor toolchain to resolve safely.
 - **Build verified**: `npm run build-dev` completed successfully under Node `v24.19.0` and produced the `www/` output.
+- **CI**: a GitHub Actions workflow has been added at `.github/workflows/ci.yml` to run lint, tests, and build on `main`.
 
 ### Install dependencies
 
