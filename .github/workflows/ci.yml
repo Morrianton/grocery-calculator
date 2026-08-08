@@ -79,7 +79,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm run build
+          npx ng build --configuration=production --base-href=/grocery-calculator/ --output-path=www
           npx angular-cli-ghpages --dir=www \
             --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git \
             --branch gh-pages
