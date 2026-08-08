@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { ItemFormPage } from '../item-form/item-form.page';
-import { GroceryService } from '../../services/grocery.service';
+import { GroceryService, GroceryItem } from '../../services/grocery.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
@@ -42,26 +42,23 @@ import { trashOutline, createOutline, add } from 'ionicons/icons';
   ]
 })
 export class CartPage implements OnInit {
-  items: any[] = [];
+  private modalCtrl = inject(ModalController);
+  private groceryService = inject(GroceryService);
+  private alertCtrl = inject(AlertController);
+
+  items: GroceryItem[] = [];
   subtotal = 0;
   foodTax = 0;
   nonFoodTax = 0;
   total = 0;
   isLoading = false;
 
-  constructor(
-    private modalCtrl: ModalController,
-    private groceryService: GroceryService,
-    private alertCtrl: AlertController
-  ) {
+  ngOnInit() {
     addIcons({
       'trash-outline': trashOutline,
       'create-outline': createOutline,
       'add': add
     });
-  }
-
-  ngOnInit() {
     this.loadItems();
   }
 
@@ -113,12 +110,12 @@ export class CartPage implements OnInit {
     return await modal.present();
   }
 
-  async editItem(item: any) {
+  async editItem(item: GroceryItem) {
     const modal = await this.modalCtrl.create({
       component: ItemFormPage,
       componentProps: {
         mode: 'edit',
-        item: item
+        item
       }
     });
 
@@ -131,7 +128,7 @@ export class CartPage implements OnInit {
     return await modal.present();
   }
 
-  async deleteItem(item: any) {
+  async deleteItem(item: GroceryItem) {
     const alert = await this.alertCtrl.create({
       header: 'Confirm Delete',
       message: `Are you sure you want to remove ${item.name}?`,

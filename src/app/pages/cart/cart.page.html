@@ -15,19 +15,20 @@
       <ion-spinner></ion-spinner>
     </div>
   } @else {
-      <ion-list>
-        <ion-item-sliding *ngFor="let item of items">
+    <ion-list>
+      @for (item of items; track item._id) {
+        <ion-item-sliding>
           <ion-item>
             <ion-label>
               <h2>{{ item.name }}</h2>
               <p>{{ item.quantity }} {{ item.unit }} @ ${{ item.price }}/{{ item.unit }}</p>
               <p>Total: ${{ item.price * item.quantity | number:'1.2-2' }}</p>
             </ion-label>
-            <ion-note slot="end" color="{{ item.isFood ? 'success' : 'warning' }}">
+            <ion-note slot="end" [color]="item.isFood ? 'success' : 'warning'">
               {{ item.isFood ? 'Food' : 'Non-food' }}
             </ion-note>
           </ion-item>
-    
+
           <ion-item-options side="end">
             <ion-item-option color="primary" (click)="editItem(item)">
               <ion-icon slot="icon-only" name="create-outline"></ion-icon>
@@ -37,15 +38,16 @@
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
-      </ion-list>
-    
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="addItem()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    }
-  </ion-content>
+      }
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  }
+</ion-content>
 
 
 <ion-footer>

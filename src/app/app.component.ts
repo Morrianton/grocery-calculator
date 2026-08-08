@@ -8,6 +8,4 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [IonApp, IonRouterOutlet, RouterModule],
 })
-export class AppComponent {
-  constructor() {}
-}
+export class AppComponent {}
