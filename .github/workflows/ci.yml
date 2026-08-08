@@ -88,6 +88,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           npx ng build --configuration=production --base-href=/grocery-calculator/ --output-path=www
-          npx angular-cli-ghpages --dir=www \
+          npx angular-cli-ghpages --dir=www/browser \
             --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git \
             --branch gh-pages
